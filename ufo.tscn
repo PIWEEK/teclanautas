@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://celsp85dgye2f"]
+
+[ext_resource type="Script" path="res://ufo.gd" id="1_cnaas"]
+[ext_resource type="Texture2D" uid="uid://c8m178cwflcoe" path="res://img/ufo.png" id="1_tqf4e"]
+[ext_resource type="Texture2D" uid="uid://b0ue5qdwrau3e" path="res://img/name.png" id="2_wqj4s"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_170gb"]
+[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://Explosion/Explosion.tscn" id="5_d0ycg"]
+
+[node name="Ufo" type="Node2D"]
+script = ExtResource("1_cnaas")
+
+[node name="name" type="TextureRect" parent="."]
+offset_right = 250.0
+offset_bottom = 92.0
+texture = ExtResource("2_wqj4s")
+
+[node name="Label" type="RichTextLabel" parent="name"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 241.0
+offset_bottom = 80.0
+theme_override_fonts/normal_font = ExtResource("3_170gb")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "hola"
+
+[node name="ship" type="TextureRect" parent="."]
+offset_top = 92.0
+offset_right = 250.0
+offset_bottom = 288.0
+texture = ExtResource("1_tqf4e")
+
+[node name="Explosion" parent="." instance=ExtResource("5_d0ycg")]
+visible = false
+position = Vector2(123, 131)

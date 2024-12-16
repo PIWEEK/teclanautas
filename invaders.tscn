@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbw1xxhrmtffp"]
+
+[ext_resource type="Script" path="res://invaders.gd" id="1_75u7b"]
+[ext_resource type="Texture2D" uid="uid://bxtokwsvgs613" path="res://img/invaders_bg.png" id="1_cmk0c"]
+[ext_resource type="Texture2D" uid="uid://hrfmwr4omnrt" path="res://img/city1.png" id="2_8lswx"]
+[ext_resource type="PackedScene" uid="uid://cb1jy3pa1b4tk" path="res://LaserBeam/LaserBeam2D.tscn" id="4_6jpu4"]
+[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://Explosion/Explosion.tscn" id="5_wwvy3"]
+[ext_resource type="PackedScene" uid="uid://cx2q7fucaf2tg" path="res://pop_up.tscn" id="6_0khk0"]
+[ext_resource type="AudioStream" uid="uid://beweouphnd6dw" path="res://sound/Lowtone Music - Emotional Soundtrack.mp3" id="7_xx3wy"]
+
+[node name="Invaders" type="Node2D"]
+script = ExtResource("1_75u7b")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 2560.0
+offset_bottom = 1440.0
+texture = ExtResource("1_cmk0c")
+
+[node name="City" type="TextureRect" parent="."]
+offset_left = 1153.0
+offset_top = 1096.0
+offset_right = 1403.0
+offset_bottom = 1381.0
+texture = ExtResource("2_8lswx")
+
+[node name="LaserBeam2D" parent="." instance=ExtResource("4_6jpu4")]
+position = Vector2(1266, 1100)
+target_position = Vector2(-100, 0)
+
+[node name="Explosion" parent="." instance=ExtResource("5_wwvy3")]
+visible = false
+position = Vector2(1270, 1268)
+
+[node name="PopUp" parent="." instance=ExtResource("6_0khk0")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 336.5
+offset_top = 96.0
+offset_right = 2223.5
+offset_bottom = 1344.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_xx3wy")
+autoplay = true

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://bldfm8ito38tl"]
+
+[ext_resource type="Texture2D" uid="uid://cf4cfflke0lid" path="res://img/menu_bg.jpg" id="1_6hd2n"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_mccyr"]
+[ext_resource type="Texture2D" uid="uid://cdqdug4bbmc44" path="res://img/logo.png" id="2_w61c5"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_spnpq"]
+[ext_resource type="PackedScene" uid="uid://b2t0jicohat71" path="res://menu_item.tscn" id="4_nrody"]
+[ext_resource type="Texture2D" uid="uid://c0dqb3knyt3id" path="res://img/ufo_icon.png" id="5_pstbk"]
+[ext_resource type="Texture2D" uid="uid://bps7lborlr7ps" path="res://img/planet_icon.png" id="6_7jvxx"]
+[ext_resource type="AudioStream" uid="uid://beweouphnd6dw" path="res://sound/Lowtone Music - Emotional Soundtrack.mp3" id="7_m20ys"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8f2v"]
+font = ExtResource("3_spnpq")
+font_size = 256
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_mccyr")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_6hd2n")
+
+[node name="Logo" type="TextureRect" parent="."]
+offset_left = 2050.0
+offset_top = 100.0
+offset_right = 2494.0
+offset_bottom = 514.0
+texture = ExtResource("2_w61c5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 110.0
+offset_top = 125.0
+offset_right = 1528.0
+offset_bottom = 436.0
+text = "Elige una misión"
+label_settings = SubResource("LabelSettings_g8f2v")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+offset_top = 659.0
+offset_right = 2560.0
+offset_bottom = 1371.0
+theme_override_constants/h_separation = 150
+alignment = 1
+
+[node name="MeteorMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
+layout_mode = 2
+
+[node name="InvadersMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
+layout_mode = 2
+game_name = "res://invaders.tscn"
+
+[node name="Icon" parent="HFlowContainer/InvadersMission" index="0"]
+texture = ExtResource("5_pstbk")
+
+[node name="ScrollerMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
+layout_mode = 2
+game_name = "scroller"
+
+[node name="Icon" parent="HFlowContainer/ScrollerMission" index="0"]
+texture = ExtResource("6_7jvxx")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_m20ys")
+autoplay = true
+
+[connection signal="game_selected" from="HFlowContainer/MeteorMission" to="." method="_on_mission_selected"]
+[connection signal="game_selected" from="HFlowContainer/InvadersMission" to="." method="_on_mission_selected"]
+[connection signal="game_selected" from="HFlowContainer/ScrollerMission" to="." method="_on_mission_selected"]
+
+[editable path="HFlowContainer/InvadersMission"]
+[editable path="HFlowContainer/ScrollerMission"]

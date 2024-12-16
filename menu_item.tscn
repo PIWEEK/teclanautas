@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2t0jicohat71"]
+
+[ext_resource type="Texture2D" uid="uid://crwpaxedslbic" path="res://img/mission_bg.png" id="1_esvgw"]
+[ext_resource type="Texture2D" uid="uid://bi8gvfyod5jsu" path="res://img/mission_bg_hover.png" id="2_1chu7"]
+[ext_resource type="Script" path="res://menu_item.gd" id="3_m5pqs"]
+[ext_resource type="Texture2D" uid="uid://denw31rb2xs6r" path="res://img/meteorite_icon.png" id="3_ugafj"]
+[ext_resource type="AudioStream" uid="uid://djtiietjbkiek" path="res://sound/menu_select.wav" id="5_mvjkk"]
+
+[node name="MenuItem" type="TextureButton"]
+texture_normal = ExtResource("1_esvgw")
+texture_hover = ExtResource("2_1chu7")
+script = ExtResource("3_m5pqs")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 103.0
+offset_right = 604.0
+offset_bottom = 603.0
+texture = ExtResource("3_ugafj")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mvjkk")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
