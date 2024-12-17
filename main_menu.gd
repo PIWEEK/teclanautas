@@ -14,3 +14,11 @@ func _process(delta: float) -> void:
 
 func _on_mission_selected(name: Variant) -> void:
 	get_tree().change_scene_to_file(name)
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				get_tree().quit()
+			if event.keycode == KEY_2:
+				get_tree().change_scene_to_file("res://invaders.tscn")

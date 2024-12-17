@@ -62,7 +62,6 @@ texture = ExtResource("6_7jvxx")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_m20ys")
-autoplay = true
 
 [connection signal="game_selected" from="HFlowContainer/MeteorMission" to="." method="_on_mission_selected"]
 [connection signal="game_selected" from="HFlowContainer/InvadersMission" to="." method="_on_mission_selected"]

@@ -4,30 +4,11 @@ var num_word = 0
 
 var words = [[],[]]
 
-
-
-var accents = {
-	"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u",
-	"Á": "a", "É": "e", "Í": "i", "Ó": "o", "Ú": "u",
-	"à": "a", "è": "e", "ì": "i", "ò": "o", "ù": "u",
-	"À": "a", "È": "e", "Ì": "i", "Ò": "o", "Ù": "u",
-	"ä": "a", "ë": "e", "ï": "i", "ö": "o", "ü": "u",
-	"Ä": "a", "Ë": "e", "Ï": "i", "Ö": "o", "Ü": "u",
-	"â": "a", "ê": "e", "î": "i", "ô": "o", "û": "u",
-	"Â": "a", "Ê": "e", "Î": "i", "Ô": "o", "Û": "u"
-}
-
-func remove_accents(char):
-	return accents.get(char, char)
-
-func normalize(word):
-	var s = ""
-	for c in word:
-		s += remove_accents(c)
-	return s
+var config
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	load_config()
 	load_words(2)
 	load_words(3)
 	load_words(4)
@@ -53,6 +34,26 @@ func load_words(num):
 	filtered_array.shuffle()
 	words.append(filtered_array)
 
-func next_word(level):
+func _next_word(level):
 	num_word = (num_word + 1) % len(words[level])
 	return words[level][num_word]
+
+func next_word(level, letters):
+	var word = _next_word(level)
+	while letters.has(word[0]):
+		word = _next_word(level)
+	return word
+
+
+func save_config():
+	config.save("user://teclanautas.cfg")
+
+func load_config():
+	# Load data from a file.
+	config = ConfigFile.new()
+	var err = config.load("user://teclanautas.cfg")
+
+	# If the file didn't load, ignore it.
+	if err != OK:
+		config = ConfigFile.new()
+	print(config.encode_to_text())

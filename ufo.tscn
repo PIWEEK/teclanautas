@@ -26,9 +26,10 @@ bbcode_enabled = true
 text = "hola"
 
 [node name="ship" type="TextureRect" parent="."]
+offset_left = 30.0
 offset_top = 92.0
-offset_right = 250.0
-offset_bottom = 288.0
+offset_right = 221.0
+offset_bottom = 242.0
 texture = ExtResource("1_tqf4e")
 
 [node name="Explosion" parent="." instance=ExtResource("5_d0ycg")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxtokwsvgs613"
-path="res://.godot/imported/invaders_bg.png-472b05f4428bb4641774861fd650e05a.ctex"
+uid="uid://dl3i1nc0w5cdn"
+path="res://.godot/imported/star.png-d9e21300bfdce2df88dc348114f24979.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/invaders_bg.png"
-dest_files=["res://.godot/imported/invaders_bg.png-472b05f4428bb4641774861fd650e05a.ctex"]
+source_file="res://img/star.png"
+dest_files=["res://.godot/imported/star.png-d9e21300bfdce2df88dc348114f24979.ctex"]
 
 [params]
 

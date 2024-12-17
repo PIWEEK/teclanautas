@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0gw631q6uu7o"]
+
+[ext_resource type="Texture2D" uid="uid://duhjaxmpmcnu6" path="res://img/popupv.png" id="1_14v3s"]
+[ext_resource type="Script" path="res://win_popup.gd" id="2_odppo"]
+[ext_resource type="Texture2D" uid="uid://d00atl8axer4m" path="res://img/button.png" id="3_xqeja"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="4_jb8b1"]
+[ext_resource type="Texture2D" uid="uid://dl3i1nc0w5cdn" path="res://img/star.png" id="5_01syv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mvwsk"]
+font = ExtResource("4_jb8b1")
+font_size = 90
+
+[sub_resource type="LabelSettings" id="LabelSettings_ah8ey"]
+font = ExtResource("4_jb8b1")
+font_size = 125
+
+[sub_resource type="LabelSettings" id="LabelSettings_vbgtf"]
+font = ExtResource("4_jb8b1")
+font_size = 96
+
+[node name="WinPopup" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_14v3s")
+script = ExtResource("2_odppo")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+offset_left = 150.0
+offset_top = 965.0
+offset_right = 1337.0
+offset_bottom = 1115.0
+scale = Vector2(0.8, 0.8)
+theme_override_constants/h_separation = 150
+alignment = 1
+
+[node name="Button1" type="TextureButton" parent="HFlowContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_xqeja")
+
+[node name="Label" type="Label" parent="HFlowContainer/Button1"]
+layout_mode = 0
+offset_right = 462.0
+offset_bottom = 150.0
+text = "Salir"
+label_settings = SubResource("LabelSettings_mvwsk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="TextureButton" parent="HFlowContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_xqeja")
+
+[node name="Label" type="Label" parent="HFlowContainer/Button2"]
+layout_mode = 0
+offset_right = 462.0
+offset_bottom = 150.0
+text = "Jugar"
+label_settings = SubResource("LabelSettings_mvwsk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 169.0
+offset_right = 1101.0
+offset_bottom = 329.0
+text = "¡HAS GANADO!"
+label_settings = SubResource("LabelSettings_ah8ey")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="You" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 657.0
+offset_right = 1101.0
+offset_bottom = 817.0
+text = "Tu tiempo: "
+label_settings = SubResource("LabelSettings_vbgtf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Best" type="Label" parent="."]
+offset_left = 150.0
+offset_top = 769.0
+offset_right = 1101.0
+offset_bottom = 929.0
+text = "Mejor tiempo:"
+label_settings = SubResource("LabelSettings_vbgtf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Star1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 309.0
+offset_top = 417.0
+offset_right = 523.0
+offset_bottom = 633.0
+texture = ExtResource("5_01syv")
+
+[node name="Star2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 337.0
+offset_right = 730.0
+offset_bottom = 553.0
+texture = ExtResource("5_01syv")
+
+[node name="Star3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 725.0
+offset_top = 417.0
+offset_right = 939.0
+offset_bottom = 633.0
+texture = ExtResource("5_01syv")
+
+[connection signal="pressed" from="HFlowContainer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="HFlowContainer/Button2" to="." method="_on_button_2_pressed"]

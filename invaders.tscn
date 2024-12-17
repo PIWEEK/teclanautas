@@ -1,12 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbw1xxhrmtffp"]
+[gd_scene load_steps=13 format=3 uid="uid://dbw1xxhrmtffp"]
 
 [ext_resource type="Script" path="res://invaders.gd" id="1_75u7b"]
 [ext_resource type="Texture2D" uid="uid://bxtokwsvgs613" path="res://img/invaders_bg.png" id="1_cmk0c"]
 [ext_resource type="Texture2D" uid="uid://hrfmwr4omnrt" path="res://img/city1.png" id="2_8lswx"]
+[ext_resource type="Texture2D" uid="uid://b5cpu32vumar" path="res://img/label.png" id="3_hgrh8"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_thh5j"]
 [ext_resource type="PackedScene" uid="uid://cb1jy3pa1b4tk" path="res://LaserBeam/LaserBeam2D.tscn" id="4_6jpu4"]
 [ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://Explosion/Explosion.tscn" id="5_wwvy3"]
-[ext_resource type="PackedScene" uid="uid://cx2q7fucaf2tg" path="res://pop_up.tscn" id="6_0khk0"]
+[ext_resource type="PackedScene" uid="uid://djhhbb224jdw6" path="res://level_selection.tscn" id="7_fpmof"]
 [ext_resource type="AudioStream" uid="uid://beweouphnd6dw" path="res://sound/Lowtone Music - Emotional Soundtrack.mp3" id="7_xx3wy"]
+[ext_resource type="PackedScene" uid="uid://c0gw631q6uu7o" path="res://win_popup.tscn" id="11_jdl8y"]
+[ext_resource type="AudioStream" uid="uid://c8bc5f7s41wg1" path="res://sound/error.wav" id="11_mbdt4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_236tv"]
+font = ExtResource("3_thh5j")
+font_size = 100
 
 [node name="Invaders" type="Node2D"]
 script = ExtResource("1_75u7b")
@@ -15,6 +23,42 @@ script = ExtResource("1_75u7b")
 offset_right = 2560.0
 offset_bottom = 1440.0
 texture = ExtResource("1_cmk0c")
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 1200.0
+offset_right = 460.0
+offset_bottom = 1372.0
+texture = ExtResource("3_hgrh8")
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 2100.0
+offset_top = 1200.0
+offset_right = 2500.0
+offset_bottom = 1372.0
+texture = ExtResource("3_hgrh8")
+
+[node name="Level" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 1200.0
+offset_right = 460.0
+offset_bottom = 1372.0
+label_settings = SubResource("LabelSettings_236tv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 2100.0
+offset_top = 1200.0
+offset_right = 2500.0
+offset_bottom = 1372.0
+label_settings = SubResource("LabelSettings_236tv")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="City" type="TextureRect" parent="."]
 offset_left = 1153.0
@@ -31,8 +75,10 @@ target_position = Vector2(-100, 0)
 visible = false
 position = Vector2(1270, 1268)
 
-[node name="PopUp" parent="." instance=ExtResource("6_0khk0")]
-visible = false
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_xx3wy")
+
+[node name="LevelSelection" parent="." instance=ExtResource("7_fpmof")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,7 +90,23 @@ offset_right = 2223.5
 offset_bottom = 1344.0
 grow_horizontal = 2
 grow_vertical = 2
+current_game = "invaders"
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_xx3wy")
-autoplay = true
+[node name="WinPopup" parent="." instance=ExtResource("11_jdl8y")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 656.0
+offset_top = 91.0
+offset_right = 1904.0
+offset_bottom = 1349.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Error" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_mbdt4")
+
+[connection signal="level_select" from="LevelSelection" to="." method="_on_level_selection_level_select"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://cug3jssq2j67k"]
+
+[ext_resource type="Texture2D" uid="uid://6pl74fdg880h" path="res://img/level.png" id="1_ilr4p"]
+[ext_resource type="Script" path="res://level.gd" id="2_0cc82"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_gb42d"]
+[ext_resource type="Texture2D" uid="uid://pycchtqxkfcu" path="res://img/lock.png" id="4_xw3o1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_22y1m"]
+font = ExtResource("3_gb42d")
+font_size = 55
+
+[node name="Level" type="Button"]
+offset_right = 100.0
+offset_bottom = 100.0
+icon = ExtResource("1_ilr4p")
+flat = true
+script = ExtResource("2_0cc82")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "40"
+label_settings = SubResource("LabelSettings_22y1m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xw3o1")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
