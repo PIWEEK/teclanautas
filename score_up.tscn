@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyfd05lra6uy3"]
+
+[ext_resource type="Texture2D" uid="uid://pudpdw57qyrr" path="res://img/scoreup.png" id="1_3n7yy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mejla"]
+size = Vector2(168, 143)
+
+[node name="ScoreUp" type="Area2D"]
+z_index = 6
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(87, 115)
+shape = SubResource("RectangleShape2D_mejla")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_3n7yy")

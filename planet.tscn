@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqq4u8fepnipa"]
+
+[ext_resource type="Script" path="res://planet.gd" id="1_8mnmw"]
+[ext_resource type="Texture2D" uid="uid://cj5nr0l0dpvoc" path="res://img/planet4.png" id="2_dneef"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crojv"]
+radius = 102.396
+
+[node name="Planet" type="Area2D"]
+z_index = 6
+z_as_relative = false
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_8mnmw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(120, 117)
+shape = SubResource("CircleShape2D_crojv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 2
+offset_right = 241.0
+offset_bottom = 240.0
+rotation = -6.28319
+pivot_offset = Vector2(120, 120)
+texture = ExtResource("2_dneef")

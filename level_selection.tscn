@@ -20,6 +20,7 @@ texture = ExtResource("1_h2pb8")
 script = ExtResource("2_h8au1")
 
 [node name="Title" type="Label" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 225.0
 offset_right = 1737.0
@@ -40,6 +41,7 @@ theme_override_constants/v_separation = 30
 alignment = 1
 
 [node name="ButtonsContainer" type="HFlowContainer" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 925.0
 offset_right = 1737.0

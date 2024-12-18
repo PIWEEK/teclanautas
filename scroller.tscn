@@ -1,0 +1,285 @@
+[gd_scene load_steps=31 format=3 uid="uid://m6yi4jy37trd"]
+
+[ext_resource type="Script" path="res://scroller.gd" id="1_0rqyl"]
+[ext_resource type="Texture2D" uid="uid://cf7lax78rxurk" path="res://img/scroller_bg.jpg" id="2_6c6qe"]
+[ext_resource type="Texture2D" uid="uid://c7sbybltheha1" path="res://img/stargate1.png" id="3_0h2ig"]
+[ext_resource type="Texture2D" uid="uid://8wp5uvrx2b2c" path="res://img/spaceship0.png" id="3_xtyp5"]
+[ext_resource type="Texture2D" uid="uid://bafrxxagdv6dq" path="res://img/spaceship1.png" id="4_wn2mp"]
+[ext_resource type="Texture2D" uid="uid://bp3k105hkym2u" path="res://img/spaceship2.png" id="5_7nkeh"]
+[ext_resource type="Texture2D" uid="uid://cwwf5cisgt3mt" path="res://img/spaceship3.png" id="6_10nxq"]
+[ext_resource type="PackedScene" uid="uid://kw43gmnwh60k" path="res://shadow.tscn" id="7_u54xx"]
+[ext_resource type="AudioStream" uid="uid://c8bc5f7s41wg1" path="res://sound/error.wav" id="8_j7edu"]
+[ext_resource type="Texture2D" uid="uid://bmr4lf0tqt8w0" path="res://img/stargate2.png" id="10_sx388"]
+[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://Explosion/Explosion.tscn" id="10_tkbe2"]
+[ext_resource type="Texture2D" uid="uid://crcvmtxsjob7i" path="res://img/warp/warp0.png" id="11_3jito"]
+[ext_resource type="Texture2D" uid="uid://btygkq3m65sc" path="res://img/warp/warp1.png" id="12_nkpj2"]
+[ext_resource type="Texture2D" uid="uid://bdtlq0bbkfwcp" path="res://img/warp/warp2.png" id="13_sw85m"]
+[ext_resource type="Texture2D" uid="uid://bsnp8caunyg5y" path="res://img/warp/warp3.png" id="14_lv4sl"]
+[ext_resource type="Texture2D" uid="uid://chy3skyrauoee" path="res://img/warp/warp4.png" id="15_yfp81"]
+[ext_resource type="Texture2D" uid="uid://ceywtdygjjjr1" path="res://img/warp/warp5.png" id="16_t53ss"]
+[ext_resource type="Texture2D" uid="uid://cejab5xi04sgh" path="res://img/warp/warp6.png" id="17_mv6js"]
+[ext_resource type="Texture2D" uid="uid://bmf0gaeacb2tt" path="res://img/warp/warp7.png" id="18_4v2f1"]
+[ext_resource type="PackedScene" uid="uid://c0gw631q6uu7o" path="res://win_popup.tscn" id="19_fxavp"]
+[ext_resource type="PackedScene" uid="uid://djhhbb224jdw6" path="res://level_selection.tscn" id="20_g1ujy"]
+[ext_resource type="Texture2D" uid="uid://b5cpu32vumar" path="res://img/label.png" id="21_utnik"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="22_dw2r4"]
+[ext_resource type="AudioStream" uid="uid://8exsom31fdai" path="res://sound/score_up.wav" id="23_w1pgb"]
+[ext_resource type="AudioStream" uid="uid://cw7k2suugnbmo" path="res://sound/teleport.wav" id="25_itnwq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gd0df"]
+size = Vector2(47.5, 285)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qssn7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xtyp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wn2mp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7nkeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_10nxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7nkeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wn2mp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7qph"]
+size = Vector2(236, 115)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2o7h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_3jito")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_nkpj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sw85m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_lv4sl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_yfp81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_t53ss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mv6js")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_4v2f1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vk2nh"]
+font = ExtResource("22_dw2r4")
+font_size = 100
+
+[node name="Scroller" type="Node2D"]
+script = ExtResource("1_0rqyl")
+
+[node name="Bg1" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_6c6qe")
+
+[node name="Bg2" type="TextureRect" parent="."]
+offset_left = 2630.0
+offset_right = 3945.0
+offset_bottom = 740.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_6c6qe")
+flip_h = true
+
+[node name="Stargate1" type="Area2D" parent="."]
+position = Vector2(10000, 446)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stargate1"]
+position = Vector2(251.75, 243)
+shape = SubResource("RectangleShape2D_gd0df")
+
+[node name="Stargate1Img" type="TextureRect" parent="Stargate1"]
+offset_right = 276.0
+offset_bottom = 500.0
+texture = ExtResource("3_0h2ig")
+
+[node name="Planets" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Shadow1" parent="." instance=ExtResource("7_u54xx")]
+visible = false
+z_index = 8
+offset_left = 25.0
+offset_top = 30.0
+offset_right = 471.0
+offset_bottom = 270.0
+
+[node name="Shadow2" parent="." instance=ExtResource("7_u54xx")]
+visible = false
+z_index = 8
+offset_left = 25.0
+offset_top = 315.0
+offset_right = 471.0
+offset_bottom = 555.0
+num_shadow = 1
+
+[node name="Shadow3" parent="." instance=ExtResource("7_u54xx")]
+visible = false
+z_index = 8
+offset_left = 25.0
+offset_top = 600.0
+offset_right = 471.0
+offset_bottom = 840.0
+num_shadow = 2
+
+[node name="Shadow4" parent="." instance=ExtResource("7_u54xx")]
+visible = false
+z_index = 8
+offset_left = 25.0
+offset_top = 885.0
+offset_right = 471.0
+offset_bottom = 1125.0
+num_shadow = 3
+
+[node name="Shadow5" parent="." instance=ExtResource("7_u54xx")]
+visible = false
+z_index = 8
+offset_left = 25.0
+offset_top = 1170.0
+offset_right = 471.0
+offset_bottom = 1410.0
+num_shadow = 4
+
+[node name="Error" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_j7edu")
+volume_db = 18.0
+
+[node name="Ship" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(287, 461)
+collision_mask = 7
+
+[node name="Anim" type="AnimatedSprite2D" parent="Ship"]
+sprite_frames = SubResource("SpriteFrames_qssn7")
+frame_progress = 0.159394
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+position = Vector2(285, 116.5)
+shape = SubResource("RectangleShape2D_j7qph")
+
+[node name="Explosion" parent="Ship" instance=ExtResource("10_tkbe2")]
+visible = false
+z_index = 7
+position = Vector2(264, 121)
+
+[node name="Stargate2" type="Area2D" parent="."]
+z_index = 6
+position = Vector2(10000, 446)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stargate2"]
+position = Vector2(104, 256)
+shape = SubResource("RectangleShape2D_gd0df")
+
+[node name="Stargate2Img" type="TextureRect" parent="Stargate2"]
+offset_right = 276.0
+offset_bottom = 500.0
+texture = ExtResource("10_sx388")
+
+[node name="Warp" type="AnimatedSprite2D" parent="Stargate2/Stargate2Img"]
+visible = false
+position = Vector2(8, 264)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_v2o7h")
+frame = 7
+frame_progress = 1.0
+
+[node name="WinPopup" parent="." instance=ExtResource("19_fxavp")]
+visible = false
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 656.0
+offset_top = 91.0
+offset_right = 1904.0
+offset_bottom = 1349.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelection" parent="." instance=ExtResource("20_g1ujy")]
+visible = false
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 336.5
+offset_top = 96.0
+offset_right = 2223.5
+offset_bottom = 1344.0
+grow_horizontal = 2
+grow_vertical = 2
+current_game = "scroller"
+
+[node name="Progress" type="TextureRect" parent="."]
+visible = false
+z_index = 3
+offset_left = 2142.0
+offset_top = 28.0
+offset_right = 2542.0
+offset_bottom = 200.0
+texture = ExtResource("21_utnik")
+
+[node name="Score" type="Label" parent="Progress"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 172.0
+text = "0"
+label_settings = SubResource("LabelSettings_vk2nh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioScoreUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_w1pgb")
+volume_db = 12.0
+
+[node name="AudioTeleport" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_itnwq")
+volume_db = 24.0
+
+[connection signal="area_entered" from="Stargate1" to="." method="_on_stargate_1_area_entered"]
+[connection signal="finished" from="Shadow1" to="." method="_on_shadow_finished"]
+[connection signal="finished" from="Shadow2" to="." method="_on_shadow_finished"]
+[connection signal="finished" from="Shadow3" to="." method="_on_shadow_finished"]
+[connection signal="finished" from="Shadow4" to="." method="_on_shadow_finished"]
+[connection signal="finished" from="Shadow5" to="." method="_on_shadow_finished"]
+[connection signal="area_entered" from="Ship" to="." method="_on_ship_area_entered"]
+[connection signal="area_entered" from="Stargate2" to="." method="_on_stargate_2_area_entered"]
+[connection signal="level_select" from="LevelSelection" to="." method="_on_level_selection_level_select"]

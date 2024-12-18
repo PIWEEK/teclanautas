@@ -55,7 +55,7 @@ texture = ExtResource("5_pstbk")
 
 [node name="ScrollerMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
 layout_mode = 2
-game_name = "scroller"
+game_name = "res://scroller.tscn"
 
 [node name="Icon" parent="HFlowContainer/ScrollerMission" index="0"]
 texture = ExtResource("6_7jvxx")

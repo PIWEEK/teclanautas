@@ -25,6 +25,7 @@ texture = ExtResource("1_14v3s")
 script = ExtResource("2_odppo")
 
 [node name="HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 965.0
 offset_right = 1337.0
@@ -60,6 +61,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Title" type="Label" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 169.0
 offset_right = 1101.0
@@ -70,6 +72,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="You" type="Label" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 657.0
 offset_right = 1101.0
@@ -80,6 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Best" type="Label" parent="."]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 769.0
 offset_right = 1101.0

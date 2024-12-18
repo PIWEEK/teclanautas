@@ -43,10 +43,12 @@ func init(title, you, best, stars, callback1, callback2):
 
 
 func _on_button_1_pressed() -> void:
+	print("_on_button_1_pressed")
 	if cb1:
 		cb1.call()
 
 
 func _on_button_2_pressed() -> void:
+	print("_on_button_2_pressed")
 	if cb2:
 		cb2.call()

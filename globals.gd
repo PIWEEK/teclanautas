@@ -44,6 +44,8 @@ func next_word(level, letters):
 		word = _next_word(level)
 	return word
 
+func clear_config():
+	ConfigFile.new().save("user://teclanautas.cfg")
 
 func save_config():
 	config.save("user://teclanautas.cfg")
@@ -56,4 +58,13 @@ func load_config():
 	# If the file didn't load, ignore it.
 	if err != OK:
 		config = ConfigFile.new()
-	print(config.encode_to_text())
+
+
+func move(item, target, speed, delta):
+	var distance = item.position.distance_to(target)
+	if (distance < 10):
+		item.position.x = target.x
+		item.position.y = target.y
+	else:
+		var direction = item.position.direction_to(target);
+		item.position += direction * speed * delta

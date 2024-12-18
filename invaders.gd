@@ -41,8 +41,8 @@ func _unhandled_input(event):
 							ufo.add_letter(character)
 							writing_to_ufo = ufo
 							break
-				if writing_to_ufo == null:
-					_on_letter_failed()
+					if writing_to_ufo == null:
+						_on_letter_failed()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -77,14 +77,7 @@ func move_ufo(moving_ufo, delta):
 			else:
 				target.x = RIGHT
 
-		if (moving_ufo.position.x > target.x):
-			moving_ufo.position.x = max(LEFT, moving_ufo.position.x - delta * ufo_speed)
-		elif (moving_ufo.position.x < target.x):
-			moving_ufo.position.x = min(RIGHT, moving_ufo.position.x + delta * ufo_speed)
-
-		if (moving_ufo.position.y < target.y):
-			moving_ufo.position.y = min(target.y, moving_ufo.position.y + delta * ufo_speed)
-
+		Globals.move(moving_ufo, target, ufo_speed, delta)
 		check_end()
 
 
@@ -95,6 +88,8 @@ func check_end():
 
 		while len(ufos) > 0:
 			delete_ufo(ufos[0])
+
+		ufos_by_word.clear()
 
 		$WinPopup.init("Has perdido :(", "¿Quieres jugar otra vez?", "", 0, exit_to_menu, start)
 		$WinPopup.visible = true
@@ -175,7 +170,9 @@ func win():
 	$WinPopup.init("¡Has ganado!", "Tu tiempo: " + str(your_time), "Mejor tiempo: " + str(best_times[current_level]), stars, exit_to_menu, next_level)
 	$WinPopup.visible = true
 
-	Globals.config.set_value("invaders", "level", current_level + 2)
+	var max_level = Globals.config.set_value("scroller", "level", -1)
+	if current_level+1 > max_level:
+		Globals.config.set_value("scroller", "level", current_level + 1)
 	Globals.save_config()
 
 func exit_to_menu():
@@ -193,6 +190,8 @@ func start():
 	while len(ufos) > 0:
 		delete_ufo(ufos[0])
 
+	ufos_by_word.clear()
+
 	create_ufos()
 	time = 0
 	$Background/Level.text = "Nivel: " + str(current_level+1)
@@ -205,4 +204,4 @@ func _on_letter_failed():
 
 
 func _on_level_selection_level_select(level: Variant) -> void:
-	current_level = level - 1
+	current_level = level

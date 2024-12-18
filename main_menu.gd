@@ -4,6 +4,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#Globals.clear_config()
 	pass
 
 
@@ -22,3 +23,5 @@ func _unhandled_input(event):
 				get_tree().quit()
 			if event.keycode == KEY_2:
 				get_tree().change_scene_to_file("res://invaders.tscn")
+			if event.keycode == KEY_3:
+				get_tree().change_scene_to_file("res://scroller.tscn")

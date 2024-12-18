@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dbw1xxhrmtffp"]
 
 [ext_resource type="Script" path="res://invaders.gd" id="1_75u7b"]
-[ext_resource type="Texture2D" uid="uid://bxtokwsvgs613" path="res://img/invaders_bg.png" id="1_cmk0c"]
+[ext_resource type="Texture2D" uid="uid://c58kwb3e2ree4" path="res://img/invaders_bg.jpg" id="2_2woqg"]
 [ext_resource type="Texture2D" uid="uid://hrfmwr4omnrt" path="res://img/city1.png" id="2_8lswx"]
 [ext_resource type="Texture2D" uid="uid://b5cpu32vumar" path="res://img/label.png" id="3_hgrh8"]
 [ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_thh5j"]
@@ -22,7 +22,7 @@ script = ExtResource("1_75u7b")
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 2560.0
 offset_bottom = 1440.0
-texture = ExtResource("1_cmk0c")
+texture = ExtResource("2_2woqg")
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 layout_mode = 0
