@@ -1,17 +1,12 @@
-extends TextureButton
-signal game_selected(name)
-@export var game_name = "meteor"
+extends Node2D
 
+var target
+var target_num
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	pass
-
-
-func _on_pressed() -> void:
-	$Sound.play()
-	game_selected.emit(game_name)

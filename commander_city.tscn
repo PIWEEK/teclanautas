@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://k7f862r4wv55"]
+
+[ext_resource type="Texture2D" uid="uid://d1syuxvdxdo1a" path="res://img/commander_city.png" id="1_iq34m"]
+[ext_resource type="Script" path="res://commander_city.gd" id="2_piu6d"]
+[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://Explosion/Explosion.tscn" id="3_6dur6"]
+[ext_resource type="Texture2D" uid="uid://hlvhbbeupy8a" path="res://img/commander_city_ruins.png" id="4_oupjl"]
+
+[node name="CommanderCity" type="TextureRect"]
+offset_left = -115.0
+offset_top = -125.0
+offset_right = 114.0
+offset_bottom = 125.0
+texture = ExtResource("1_iq34m")
+script = ExtResource("2_piu6d")
+
+[node name="Explosion" parent="." instance=ExtResource("3_6dur6")]
+visible = false
+position = Vector2(115, 126)
+
+[node name="Ruins" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_oupjl")
+
+[node name="City" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_iq34m")

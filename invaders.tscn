@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbw1xxhrmtffp"]
+[gd_scene load_steps=15 format=3 uid="uid://dbw1xxhrmtffp"]
 
 [ext_resource type="Script" path="res://invaders.gd" id="1_75u7b"]
 [ext_resource type="Texture2D" uid="uid://c58kwb3e2ree4" path="res://img/invaders_bg.jpg" id="2_2woqg"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://beweouphnd6dw" path="res://sound/Lowtone Music - Emotional Soundtrack.mp3" id="7_xx3wy"]
 [ext_resource type="PackedScene" uid="uid://c0gw631q6uu7o" path="res://win_popup.tscn" id="11_jdl8y"]
 [ext_resource type="AudioStream" uid="uid://c8bc5f7s41wg1" path="res://sound/error.wav" id="11_mbdt4"]
+[ext_resource type="AudioStream" uid="uid://b3bs27exu4d7w" path="res://sound/city_destroyed.wav" id="12_e50bt"]
+[ext_resource type="AudioStream" uid="uid://qqbbnpxh1ucr" path="res://sound/explosion.wav" id="13_di3ho"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_236tv"]
 font = ExtResource("3_thh5j")
@@ -24,15 +26,8 @@ offset_right = 2560.0
 offset_bottom = 1440.0
 texture = ExtResource("2_2woqg")
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
-layout_mode = 0
-offset_left = 60.0
-offset_top = 1200.0
-offset_right = 460.0
-offset_bottom = 1372.0
-texture = ExtResource("3_hgrh8")
-
-[node name="TextureRect2" type="TextureRect" parent="Background"]
+[node name="Time" type="TextureRect" parent="Background"]
+visible = false
 layout_mode = 0
 offset_left = 2100.0
 offset_top = 1200.0
@@ -40,22 +35,10 @@ offset_right = 2500.0
 offset_bottom = 1372.0
 texture = ExtResource("3_hgrh8")
 
-[node name="Level" type="Label" parent="Background"]
+[node name="Label" type="Label" parent="Background/Time"]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 1200.0
-offset_right = 460.0
-offset_bottom = 1372.0
-label_settings = SubResource("LabelSettings_236tv")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Time" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 2100.0
-offset_top = 1200.0
-offset_right = 2500.0
-offset_bottom = 1372.0
+offset_right = 400.0
+offset_bottom = 172.0
 label_settings = SubResource("LabelSettings_236tv")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -108,5 +91,11 @@ grow_vertical = 2
 
 [node name="Error" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_mbdt4")
+
+[node name="CityDestroyed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_e50bt")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_di3ho")
 
 [connection signal="level_select" from="LevelSelection" to="." method="_on_level_selection_level_select"]

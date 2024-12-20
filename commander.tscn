@@ -1,0 +1,203 @@
+[gd_scene load_steps=16 format=3 uid="uid://bo8xb5wnbgt"]
+
+[ext_resource type="Script" path="res://commander.gd" id="1_nyt6q"]
+[ext_resource type="Texture2D" uid="uid://bjbklrhewiag5" path="res://img/commander_bg.jpg" id="1_ubo1b"]
+[ext_resource type="Texture2D" uid="uid://c3g77hmqiw8ce" path="res://img/commander_mountains.png" id="2_r8jg2"]
+[ext_resource type="PackedScene" uid="uid://k7f862r4wv55" path="res://commander_city.tscn" id="3_bj53v"]
+[ext_resource type="PackedScene" uid="uid://c0gw631q6uu7o" path="res://win_popup.tscn" id="6_snlwv"]
+[ext_resource type="PackedScene" uid="uid://b16h3jrxmyptt" path="res://missile_area.tscn" id="7_f1r40"]
+[ext_resource type="PackedScene" uid="uid://djhhbb224jdw6" path="res://level_selection.tscn" id="7_rtxb8"]
+[ext_resource type="AudioStream" uid="uid://c8bc5f7s41wg1" path="res://sound/error.wav" id="8_pmh7n"]
+[ext_resource type="Texture2D" uid="uid://b5cpu32vumar" path="res://img/label.png" id="9_17n1g"]
+[ext_resource type="AudioStream" uid="uid://qqbbnpxh1ucr" path="res://sound/explosion.wav" id="9_lcydx"]
+[ext_resource type="AudioStream" uid="uid://b3bs27exu4d7w" path="res://sound/city_destroyed.wav" id="10_b43jf"]
+[ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="10_hyb6b"]
+[ext_resource type="Texture2D" uid="uid://o7ipep3mh20l" path="res://img/meteorite.png" id="11_g4goo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jitbj"]
+font = ExtResource("10_hyb6b")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_lws2g"]
+font = ExtResource("10_hyb6b")
+font_size = 76
+
+[node name="Commander" type="Node2D"]
+script = ExtResource("1_nyt6q")
+
+[node name="Bg" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ubo1b")
+
+[node name="Mountains" type="TextureRect" parent="."]
+z_index = 5
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_r8jg2")
+
+[node name="City1" parent="." instance=ExtResource("3_bj53v")]
+offset_left = 307.0
+offset_top = 936.0
+offset_right = 536.0
+offset_bottom = 1186.0
+
+[node name="City2" parent="." instance=ExtResource("3_bj53v")]
+offset_left = 736.0
+offset_top = 936.0
+offset_right = 965.0
+offset_bottom = 1186.0
+num = 1
+
+[node name="City3" parent="." instance=ExtResource("3_bj53v")]
+offset_left = 1165.0
+offset_top = 936.0
+offset_right = 1394.0
+offset_bottom = 1186.0
+num = 2
+
+[node name="City4" parent="." instance=ExtResource("3_bj53v")]
+offset_left = 1594.0
+offset_top = 936.0
+offset_right = 1823.0
+offset_bottom = 1186.0
+num = 3
+
+[node name="City5" parent="." instance=ExtResource("3_bj53v")]
+offset_left = 2023.0
+offset_top = 936.0
+offset_right = 2252.0
+offset_bottom = 1186.0
+num = 4
+
+[node name="MissileArea1" parent="." instance=ExtResource("7_f1r40")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 80.0
+offset_top = 200.0
+offset_right = 880.0
+offset_bottom = 1000.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="MissileArea2" parent="." instance=ExtResource("7_f1r40")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 880.0
+offset_top = 200.0
+offset_right = 1680.0
+offset_bottom = 1000.0
+num_area = 1
+
+[node name="MissileArea3" parent="." instance=ExtResource("7_f1r40")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1680.0
+offset_top = 200.0
+offset_right = 2480.0
+offset_bottom = 1000.0
+num_area = 2
+
+[node name="LevelSelection" parent="." instance=ExtResource("7_rtxb8")]
+visible = false
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 336.5
+offset_top = 96.0
+offset_right = 2223.5
+offset_bottom = 1344.0
+grow_horizontal = 2
+grow_vertical = 2
+current_game = "commander"
+
+[node name="WinPopup" parent="." instance=ExtResource("6_snlwv")]
+visible = false
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 656.0
+offset_top = 91.0
+offset_right = 1904.0
+offset_bottom = 1349.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Error" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_pmh7n")
+volume_db = 18.0
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_lcydx")
+
+[node name="CityDestroyed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_b43jf")
+
+[node name="Progress" type="TextureRect" parent="."]
+visible = false
+z_index = 5
+offset_left = 2134.0
+offset_top = 1243.0
+offset_right = 2534.0
+offset_bottom = 1415.0
+texture = ExtResource("9_17n1g")
+
+[node name="Score" type="Label" parent="Progress"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 172.0
+text = "0"
+label_settings = SubResource("LabelSettings_jitbj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Remaining" type="TextureRect" parent="."]
+visible = false
+z_index = 5
+offset_left = 25.0
+offset_top = 1243.0
+offset_right = 425.0
+offset_bottom = 1415.0
+texture = ExtResource("9_17n1g")
+
+[node name="Label" type="Label" parent="Remaining"]
+layout_mode = 0
+offset_right = 334.0
+offset_bottom = 172.0
+text = "99 / 99"
+label_settings = SubResource("LabelSettings_lws2g")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Remaining"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 39.0
+offset_right = 152.0
+offset_bottom = 114.0
+rotation = 0.785398
+pivot_offset = Vector2(57, 37)
+texture = ExtResource("11_g4goo")
+
+[connection signal="finished" from="MissileArea1" to="." method="_on_missile_area_finished"]
+[connection signal="letter_failed" from="MissileArea1" to="." method="_on_letter_failed"]
+[connection signal="finished" from="MissileArea2" to="." method="_on_missile_area_finished"]
+[connection signal="letter_failed" from="MissileArea2" to="." method="_on_letter_failed"]
+[connection signal="finished" from="MissileArea3" to="." method="_on_missile_area_finished"]
+[connection signal="letter_failed" from="MissileArea3" to="." method="_on_letter_failed"]
+[connection signal="level_select" from="LevelSelection" to="." method="_on_level_selection_level_select"]

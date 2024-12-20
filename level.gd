@@ -8,12 +8,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func init(level, locked):
 	_level = level
-	$Label.text = str(level)
+	$Label.text = str(level+1)
 	$Label.visible = not locked
 	$Lock.visible = locked
 

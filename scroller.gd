@@ -7,6 +7,7 @@ var planet_scene: PackedScene = preload("res://planet.tscn")
 var space_speed = 125
 var ship_speed = 500
 const ship_height = 240
+const margin_to_stargate = 1200
 
 var shadows = []
 var playing = false
@@ -19,6 +20,9 @@ var current_level = 0
 
 var space_items = []
 var word_size = 2
+
+var level_width = 0
+var advance = 0
 
 var levels = [
 	[
@@ -105,10 +109,10 @@ func move_space(delta):
 	$Bg1.position.x -= inc
 	$Bg2.position.x -= inc
 
-	if $Bg1.position.x + $Bg1.size.x * 2 < 100:
+	if $Bg1.position.x + $Bg1.size.x * 2 < -100:
 		$Bg1.position.x += $Bg1.size.x * 4
 
-	if $Bg2.position.x + $Bg2.size.x * 2 < 100:
+	if $Bg2.position.x + $Bg2.size.x * 2 < -100:
 		$Bg2.position.x += $Bg2.size.x * 4
 
 	# items
@@ -124,8 +128,15 @@ func move_space(delta):
 	# stargate
 	$Stargate1.position.x -= inc
 	$Stargate2.position.x -= inc
-	if $Stargate2.position.distance_to($Ship.position) < 800:
+	if $Stargate2.position.distance_to($Ship.position) < margin_to_stargate:
 		start_end_animation()
+
+	# progress_bar
+
+	advance += inc
+	var percent = advance / level_width
+	$ProgressBar.set_progress(percent)
+
 
 func delete_item(item):
 	if item != null:
@@ -163,6 +174,7 @@ func start():
 	$Ship.visible = true
 	$Ship/Explosion.visible = false
 	$Progress.visible = true
+	$ProgressBar.visible = true
 
 	load_level()
 
@@ -201,12 +213,15 @@ func load_level():
 	word_size = 2 + round(current_level / 8)
 	space_speed = 125 + current_level * 10
 	ship_speed = 500 + 5 * current_level
+	advance = 0
+
+	var map = levels[l]
 
 	for row in range(5):
-		for col in range(len(levels[l][row])):
+		for col in range(len(map[row])):
 			var x = col_gap + col * column_size
 			var y = shadows[row].position.y
-			var s = levels[l][row][col]
+			var s = map[row][col]
 			if s == "S":
 				create_item(score_up_scene, x, y)
 			elif s == "P":
@@ -218,6 +233,9 @@ func load_level():
 				$Stargate2.position.x = x + $Stargate1/Stargate1Img.size.x
 				$Stargate2.position.y = y
 
+				level_width = x - margin_to_stargate
+
+
 
 
 func update_shadow(shadow):
@@ -227,6 +245,8 @@ func update_shadow(shadow):
 
 func _on_letter_failed():
 	writing_to = null
+	score -= 5
+	$Progress/Score.text = str(score)
 	$Error.play()
 
 func exit_to_menu():
@@ -254,6 +274,7 @@ func start_end_animation():
 
 
 
+
 func _on_stargate_1_area_entered(area: Area2D) -> void:
 	if (area == $Ship):
 		$AudioTeleport.play()
@@ -272,6 +293,7 @@ func win():
 	playing = false
 
 	$Progress.visible = false
+	$ProgressBar.visible = false
 
 	var best_scores = []
 	best_scores.resize(40)
@@ -287,7 +309,7 @@ func win():
 	elif score > 700:
 		stars = 2
 
-	$WinPopup.init("¡Has ganado!", "Puntuación: " + str(score), "Mejor puntuación: " + str(best_scores[current_level]), stars, exit_to_menu, next_level)
+	$WinPopup.init("¡Has ganado!", "Puntuación: " + str(score), "Mejor puntuación: " + str(best_scores[current_level]), stars, current_level+1, exit_to_menu, next_level)
 	$WinPopup.visible = true
 
 	var max_level = Globals.config.get_value("scroller", "level", -1)
@@ -317,9 +339,11 @@ func lose():
 	for shadow in shadows:
 		shadow.visible = false
 
+	$AudioExplosion.play()
+
 	$Ship/Explosion.visible = true
 
-	$WinPopup.init("Has perdido :(", "¿Quieres jugar otra vez?", "", 0, exit_to_menu, start)
+	$WinPopup.init("Has perdido :(", "¿Quieres jugar otra vez?", "", 0, current_level+1, exit_to_menu, start)
 	$WinPopup.visible = true
 
 

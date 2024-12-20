@@ -21,10 +21,6 @@ var time = 0
 func _ready() -> void:
 	$LevelSelection.init(exit_to_menu, start)
 
-func restart():
-	current_level = 0
-	next_level()
-
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
@@ -49,12 +45,13 @@ func _unhandled_input(event):
 func _process(delta: float) -> void:
 	if playing:
 		update_time(delta)
-		for ufo in ufos:
-			move_ufo(ufo, delta)
+		#for ufo in ufos:
+		#	move_ufo(ufo, delta)
+		move_ufo(ufos[0], delta)
 
 func update_time(delta):
 	time += delta
-	$Background/Time.text = str(floor(time))
+	$Background/Time/Label.text = str(floor(time))
 
 func move_ufo(moving_ufo, delta):
 	var moving_ufo_row = moving_ufo.data["moving_ufo_row"]
@@ -85,14 +82,20 @@ func check_end():
 	if ufos[0].data["moving_ufo_row"] == 4 and ufos[0].position.x + 30 < $City.position.x + $City.size.x / 2:
 		playing = false
 		$Explosion.visible = true
+		$CityDestroyed.play()
+
+		await get_tree().create_timer(1).timeout
+		$Explosion.visible = false
+		$City.visible = false
 
 		while len(ufos) > 0:
 			delete_ufo(ufos[0])
 
 		ufos_by_word.clear()
 
-		$WinPopup.init("Has perdido :(", "¿Quieres jugar otra vez?", "", 0, exit_to_menu, start)
+		$WinPopup.init("Has perdido :(", "¿Quieres jugar otra vez?", "", 0, current_level+1, exit_to_menu, start)
 		$WinPopup.visible = true
+		$Background/Time.visible = false
 
 
 func create_ufos():
@@ -108,6 +111,7 @@ func create_ufos():
 func create_ufo(position, word_size):
 	var letters = ufos_by_word.keys().map(func(w): return w[0])
 	var word = Globals.next_word(word_size, letters)
+
 	var ufo: Node = ufo_scene.instantiate()
 	ufo.set_word(word)
 	ufo.position = position
@@ -123,6 +127,7 @@ func create_ufo(position, word_size):
 	add_child(ufo)
 
 func _on_ufo_destroyed(word):
+	$ExplosionSound.play()
 	var ufo = ufos_by_word[word]
 	if ufo == writing_to_ufo:
 		writing_to_ufo = null
@@ -167,12 +172,13 @@ func win():
 	elif time < 4 * num_ufos:
 		stars = 2
 
-	$WinPopup.init("¡Has ganado!", "Tu tiempo: " + str(your_time), "Mejor tiempo: " + str(best_times[current_level]), stars, exit_to_menu, next_level)
+	$WinPopup.init("¡Has ganado!", "Tu tiempo: " + str(your_time), "Mejor tiempo: " + str(best_times[current_level]), stars, current_level+1, exit_to_menu, next_level)
 	$WinPopup.visible = true
+	$Background/Time.visible = false
 
-	var max_level = Globals.config.set_value("scroller", "level", -1)
+	var max_level = Globals.config.get_value("invaders", "level", -1)
 	if current_level+1 > max_level:
-		Globals.config.set_value("scroller", "level", current_level + 1)
+		Globals.config.set_value("invaders", "level", current_level + 1)
 	Globals.save_config()
 
 func exit_to_menu():
@@ -186,6 +192,8 @@ func start():
 	$LevelSelection.visible = false
 	$WinPopup.visible = false
 	$Explosion.visible = false
+	$Background/Time.visible = true
+	$City.visible = true
 
 	while len(ufos) > 0:
 		delete_ufo(ufos[0])
@@ -194,14 +202,15 @@ func start():
 
 	create_ufos()
 	time = 0
-	$Background/Level.text = "Nivel: " + str(current_level+1)
 	playing = true
 
 
 func _on_letter_failed():
 	writing_to_ufo = null
+	time += 5
 	$Error.play()
 
 
 func _on_level_selection_level_select(level: Variant) -> void:
 	current_level = level
+	print("====>"+str(level))

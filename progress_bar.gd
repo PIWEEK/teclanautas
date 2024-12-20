@@ -1,6 +1,6 @@
-extends TextureButton
-signal game_selected(name)
-@export var game_name = "meteor"
+extends Node2D
+
+const max_width = 800
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,7 +11,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-
-func _on_pressed() -> void:
-	$Sound.play()
-	game_selected.emit(game_name)
+func set_progress(percent):
+	$Progress.size.x = percent * max_width
+	$Ship.position.x = percent * max_width - 25

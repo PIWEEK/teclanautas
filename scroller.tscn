@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://m6yi4jy37trd"]
+[gd_scene load_steps=33 format=3 uid="uid://m6yi4jy37trd"]
 
 [ext_resource type="Script" path="res://scroller.gd" id="1_0rqyl"]
 [ext_resource type="Texture2D" uid="uid://cf7lax78rxurk" path="res://img/scroller_bg.jpg" id="2_6c6qe"]
@@ -25,6 +25,8 @@
 [ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="22_dw2r4"]
 [ext_resource type="AudioStream" uid="uid://8exsom31fdai" path="res://sound/score_up.wav" id="23_w1pgb"]
 [ext_resource type="AudioStream" uid="uid://cw7k2suugnbmo" path="res://sound/teleport.wav" id="25_itnwq"]
+[ext_resource type="AudioStream" uid="uid://qqbbnpxh1ucr" path="res://sound/explosion.wav" id="26_5egcq"]
+[ext_resource type="PackedScene" uid="uid://mcfs62ubs06f" path="res://progress_bar.tscn" id="27_8oo7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gd0df"]
 size = Vector2(47.5, 285)
@@ -133,17 +135,17 @@ offset_bottom = 40.0
 visible = false
 z_index = 8
 offset_left = 25.0
-offset_top = 30.0
+offset_top = 130.0
 offset_right = 471.0
-offset_bottom = 270.0
+offset_bottom = 370.0
 
 [node name="Shadow2" parent="." instance=ExtResource("7_u54xx")]
 visible = false
 z_index = 8
 offset_left = 25.0
-offset_top = 315.0
+offset_top = 365.0
 offset_right = 471.0
-offset_bottom = 555.0
+offset_bottom = 605.0
 num_shadow = 1
 
 [node name="Shadow3" parent="." instance=ExtResource("7_u54xx")]
@@ -159,18 +161,18 @@ num_shadow = 2
 visible = false
 z_index = 8
 offset_left = 25.0
-offset_top = 885.0
+offset_top = 835.0
 offset_right = 471.0
-offset_bottom = 1125.0
+offset_bottom = 1075.0
 num_shadow = 3
 
 [node name="Shadow5" parent="." instance=ExtResource("7_u54xx")]
 visible = false
 z_index = 8
 offset_left = 25.0
-offset_top = 1170.0
+offset_top = 1070.0
 offset_right = 471.0
-offset_bottom = 1410.0
+offset_bottom = 1310.0
 num_shadow = 4
 
 [node name="Error" type="AudioStreamPlayer2D" parent="."]
@@ -274,12 +276,24 @@ volume_db = 12.0
 stream = ExtResource("25_itnwq")
 volume_db = 24.0
 
+[node name="AudioExplosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_5egcq")
+
+[node name="ProgressBar" parent="." instance=ExtResource("27_8oo7e")]
+visible = false
+position = Vector2(824, 1350)
+
 [connection signal="area_entered" from="Stargate1" to="." method="_on_stargate_1_area_entered"]
 [connection signal="finished" from="Shadow1" to="." method="_on_shadow_finished"]
+[connection signal="letter_failed" from="Shadow1" to="." method="_on_letter_failed"]
 [connection signal="finished" from="Shadow2" to="." method="_on_shadow_finished"]
+[connection signal="letter_failed" from="Shadow2" to="." method="_on_letter_failed"]
 [connection signal="finished" from="Shadow3" to="." method="_on_shadow_finished"]
+[connection signal="letter_failed" from="Shadow3" to="." method="_on_letter_failed"]
 [connection signal="finished" from="Shadow4" to="." method="_on_shadow_finished"]
+[connection signal="letter_failed" from="Shadow4" to="." method="_on_letter_failed"]
 [connection signal="finished" from="Shadow5" to="." method="_on_shadow_finished"]
+[connection signal="letter_failed" from="Shadow5" to="." method="_on_letter_failed"]
 [connection signal="area_entered" from="Ship" to="." method="_on_ship_area_entered"]
 [connection signal="area_entered" from="Stargate2" to="." method="_on_stargate_2_area_entered"]
 [connection signal="level_select" from="LevelSelection" to="." method="_on_level_selection_level_select"]

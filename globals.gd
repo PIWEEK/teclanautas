@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -37,6 +37,7 @@ func load_words(num):
 func _next_word(level):
 	num_word = (num_word + 1) % len(words[level])
 	return words[level][num_word]
+
 
 func next_word(level, letters):
 	var word = _next_word(level)

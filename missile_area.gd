@@ -1,6 +1,6 @@
 extends TextureRect
 
-@export var num_shadow=0
+@export var num_area=0
 var word = "."
 var pos = 0
 var alive = true
@@ -35,4 +35,15 @@ func add_letter(letter):
 
 	update_label()
 	if pos == len(word):
-		finished.emit(num_shadow)
+		finished.emit(num_area)
+
+func prepare_explossion():
+	$Label.visible = false
+	alive = false
+
+func explode():
+	$Explosion.visible = true
+	await get_tree().create_timer(1.0).timeout
+	alive = true
+	$Explosion.visible = false
+	$Label.visible = true

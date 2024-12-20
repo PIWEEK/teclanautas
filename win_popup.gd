@@ -13,10 +13,10 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func init(title, you, best, stars, callback1, callback2):
+func init(title, you, best, stars, level, callback1, callback2):
 	if stars == 0:
 		$Star1.texture = star_empty
 		$Star2.texture = star_empty
@@ -37,6 +37,7 @@ func init(title, you, best, stars, callback1, callback2):
 	$Title.text = title
 	$You.text = you
 	$Best.text = best
+	$LevelLabel.text = str(level)
 
 	cb1 = callback1
 	cb2 = callback2

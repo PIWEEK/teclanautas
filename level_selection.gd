@@ -10,13 +10,13 @@ var max_level
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	max_level = Globals.config.get_value(current_game, "level", 0)
+	max_level = 39 # Globals.config.get_value(current_game, "level", 0)
 	create_levels()
 	level_select.emit(max_level)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func init(callback1, callback2):
@@ -27,14 +27,15 @@ func create_levels():
 	for i in range(40):
 		var level: Node = level_scene.instantiate()
 		var locked = i > max_level
-		level.init(i+1, locked)
+		level.init(i, locked)
 		level.connect("level_select", _on_level_select)
 		if locked:
 			level.disabled = true
 			level.focus_mode = FOCUS_NONE
 
 		$LevelsContainer.add_child(level)
-		level.grab_focus()
+		if not locked:
+			level.grab_focus()
 
 func _on_level_select(level):
 	level_select.emit(level)

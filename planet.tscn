@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqq4u8fepnipa"]
+[gd_scene load_steps=7 format=3 uid="uid://bqq4u8fepnipa"]
 
 [ext_resource type="Script" path="res://planet.gd" id="1_8mnmw"]
 [ext_resource type="Texture2D" uid="uid://cj5nr0l0dpvoc" path="res://img/planet4.png" id="2_dneef"]
+[ext_resource type="Texture2D" uid="uid://deuj64lddp1sk" path="res://img/planet1.png" id="3_3w7wj"]
+[ext_resource type="Texture2D" uid="uid://bng7i24tfiow" path="res://img/planet2.png" id="4_1cyn8"]
+[ext_resource type="Texture2D" uid="uid://70jaqjo2wsye" path="res://img/planet3.png" id="5_rky4a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_crojv"]
 radius = 102.396
@@ -18,6 +21,42 @@ position = Vector2(120, 117)
 shape = SubResource("CircleShape2D_crojv")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+z_index = 2
+offset_right = 241.0
+offset_bottom = 240.0
+rotation = -6.28319
+pivot_offset = Vector2(120, 120)
+texture = ExtResource("2_dneef")
+
+[node name="P1" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+offset_right = 241.0
+offset_bottom = 240.0
+rotation = -6.28319
+pivot_offset = Vector2(120, 120)
+texture = ExtResource("3_3w7wj")
+
+[node name="P2" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+offset_right = 241.0
+offset_bottom = 240.0
+rotation = -6.28319
+pivot_offset = Vector2(120, 120)
+texture = ExtResource("4_1cyn8")
+
+[node name="P3" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+offset_right = 241.0
+offset_bottom = 240.0
+rotation = -6.28319
+pivot_offset = Vector2(120, 120)
+texture = ExtResource("5_rky4a")
+
+[node name="P4" type="TextureRect" parent="."]
+visible = false
 z_index = 2
 offset_right = 241.0
 offset_bottom = 240.0

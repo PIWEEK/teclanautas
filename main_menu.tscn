@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bldfm8ito38tl"]
+[gd_scene load_steps=11 format=3 uid="uid://bldfm8ito38tl"]
 
 [ext_resource type="Texture2D" uid="uid://cf4cfflke0lid" path="res://img/menu_bg.jpg" id="1_6hd2n"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_mccyr"]
@@ -6,8 +6,9 @@
 [ext_resource type="FontFile" uid="uid://cj5kipumd5mdm" path="res://fonts/Chicle-Regular.ttf" id="3_spnpq"]
 [ext_resource type="PackedScene" uid="uid://b2t0jicohat71" path="res://menu_item.tscn" id="4_nrody"]
 [ext_resource type="Texture2D" uid="uid://c0dqb3knyt3id" path="res://img/ufo_icon.png" id="5_pstbk"]
-[ext_resource type="Texture2D" uid="uid://bps7lborlr7ps" path="res://img/planet_icon.png" id="6_7jvxx"]
+[ext_resource type="Texture2D" uid="uid://bcofl2ugbuq3v" path="res://img/spaceship_icon.png" id="7_63ae0"]
 [ext_resource type="AudioStream" uid="uid://beweouphnd6dw" path="res://sound/Lowtone Music - Emotional Soundtrack.mp3" id="7_m20ys"]
+[ext_resource type="AudioStream" uid="uid://djtiietjbkiek" path="res://sound/menu_select.wav" id="9_nbcdy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g8f2v"]
 font = ExtResource("3_spnpq")
@@ -43,8 +44,9 @@ offset_bottom = 1371.0
 theme_override_constants/h_separation = 150
 alignment = 1
 
-[node name="MeteorMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
+[node name="CommanderMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
 layout_mode = 2
+game_name = "res://commander.tscn"
 
 [node name="InvadersMission" parent="HFlowContainer" instance=ExtResource("4_nrody")]
 layout_mode = 2
@@ -58,12 +60,16 @@ layout_mode = 2
 game_name = "res://scroller.tscn"
 
 [node name="Icon" parent="HFlowContainer/ScrollerMission" index="0"]
-texture = ExtResource("6_7jvxx")
+texture = ExtResource("7_63ae0")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_m20ys")
+autoplay = true
 
-[connection signal="game_selected" from="HFlowContainer/MeteorMission" to="." method="_on_mission_selected"]
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_nbcdy")
+
+[connection signal="game_selected" from="HFlowContainer/CommanderMission" to="." method="_on_mission_selected"]
 [connection signal="game_selected" from="HFlowContainer/InvadersMission" to="." method="_on_mission_selected"]
 [connection signal="game_selected" from="HFlowContainer/ScrollerMission" to="." method="_on_mission_selected"]
 
